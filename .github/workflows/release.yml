@@ -1,11 +1,13 @@
-name: build
+name: release
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,3 +28,6 @@ jobs:
         with:
           name: firmware
           path: Build/LoongArchQemu/RELEASE_GCC5/FV/*.fd
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: Build/LoongArchQemu/RELEASE_GCC5/FV/*.fd
