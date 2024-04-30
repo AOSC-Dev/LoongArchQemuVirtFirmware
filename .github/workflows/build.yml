@@ -13,7 +13,8 @@ jobs:
       - run: |
          wget https://github.com/loongson/build-tools/releases/download/2023.08.08/x86_64-cross-tools-loongarch64-binutils_2.41-gcc_13.2.0.tar.xz
          tar -vxf x86_64-cross-tools-loongarch64-binutils_2.41-gcc_13.2.0.tar.xz -C /opt
-      - run: |
+      - shell: bash
+        run: |
          export PATH=/opt/cross-tools/bin:$PATH
          export PACKAGES_PATH=$PWD/edk2:$PWD/edk2-platforms:$PWD/edk2-non-osi
          export GCC5_LOONGARCH64_PREFIX=loongarch64-unknown-linux-gnu-
