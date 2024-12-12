@@ -19,7 +19,7 @@ jobs:
         run: |
          export PATH=/opt/cross-tools/bin:$PATH
          export WORKSPACE=$PWD
-         export PACKAGES_PATH=$PWD/edk2:$PWD/edk2-platforms:$PWD/edk2-non-osi
+         export PACKAGES_PATH=$PWD/edk2
          export GCC5_LOONGARCH64_PREFIX=loongarch64-unknown-linux-gnu-
          source edk2/edksetup.sh
          make -C edk2/BaseTools
