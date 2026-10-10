@@ -13,21 +13,21 @@ jobs:
         with:
           submodules: recursive
       - run: |
-         wget https://github.com/loongson/build-tools/releases/download/2023.08.08/x86_64-cross-tools-loongarch64-binutils_2.41-gcc_13.2.0.tar.xz
-         tar -vxf x86_64-cross-tools-loongarch64-binutils_2.41-gcc_13.2.0.tar.xz -C /opt
+         wget https://github.com/loongson/build-tools/releases/download/2025.08.08/x86_64-cross-tools-loongarch64-binutils_2.45-gcc_15.1.0.tar.xz
+         tar -vxf x86_64-cross-tools-loongarch64-binutils_2.45-gcc_15.1.0.tar.xz -C /opt
       - shell: bash
         run: |
          export PATH=/opt/cross-tools/bin:$PATH
          export WORKSPACE=$PWD
          export PACKAGES_PATH=$PWD/edk2
-         export GCC5_LOONGARCH64_PREFIX=loongarch64-unknown-linux-gnu-
+         export GCC_LOONGARCH64_PREFIX=loongarch64-unknown-linux-gnu-
          source edk2/edksetup.sh
          make -C edk2/BaseTools
-         build --buildtarget=RELEASE --tagname=GCC5 --arch=LOONGARCH64 --platform=OvmfPkg/LoongArchVirt/LoongArchVirtQemu.dsc
+         build --buildtarget=RELEASE --tagname=GCC --arch=LOONGARCH64 --platform=OvmfPkg/LoongArchVirt/LoongArchVirtQemu.dsc
       - uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: Build/LoongArchVirtQemu/RELEASE_GCC5/FV/*.fd
+          path: Build/LoongArchVirtQemu/RELEASE_GCC/FV/*.fd
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: Build/LoongArchVirtQemu/RELEASE_GCC5/FV/*.fd
+          artifacts: Build/LoongArchVirtQemu/RELEASE_GCC/FV/*.fd
